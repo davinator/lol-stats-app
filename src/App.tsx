@@ -1,24 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import "./App.css";
 
 function App() {
+  const [name, setName] = useState("");
+  const [matches, setMatches] = useState<any>();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      alert("it works");
+    }, 1000);
+  };
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setName(event.currentTarget.value);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="header">LOL Stats App</header>
+      <section className="body">
+        {isLoading ? (
+          <div className="body-loading">Loading...</div>
+        ) : (
+          <form className="body-form" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="summoner"
+              value={name}
+              onChange={handleNameChange}
+            />
+          </form>
+        )}
+      </section>
     </div>
   );
 }

@@ -1,0 +1,18 @@
+.Match {
+  border-left: 6px solid;
+  margin: auto;
+  width: 50%;
+  max-width: 500px;
+  margin-bottom: 4px;
+  list-style: none;
+  padding-left: 0;
+}
+
+.Match.Victory {
+  background: #77b75a;
+  border-left-color: #126215;
+}
+.Match.Loss {
+  background: #d57e7e;
+  border-left-color: #621212;
+}

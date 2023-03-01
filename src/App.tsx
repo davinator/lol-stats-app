@@ -11,7 +11,15 @@ function App() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
-    const matches = await lolApi.getMatches(name);
+
+    let matches: Response | null = null;
+    try {
+      matches = await lolApi.getMatches(name);
+    } catch {
+      setErrorMessage("Couldn't load the data. Please try again soon.");
+      setIsLoading(false);
+      return;
+    }
 
     if (!matches.ok) {
       setIsLoading(true);
@@ -20,7 +28,6 @@ function App() {
     }
     const result = await matches.json();
     setMatches(result);
-    console.log(result);
     setIsLoading(false);
   };
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -28,7 +35,9 @@ function App() {
 
   return (
     <div className="App">
-      <header className="header">LOL Stats App</header>
+      <header className="header">
+        <h2>LOL Stats App</h2>
+      </header>
       <section className="body">
         {errorMessage && <section className="error">errorMessage</section>}
         {isLoading ? (
@@ -43,8 +52,13 @@ function App() {
                 onChange={handleNameChange}
               />
             </form>
-            {matches &&
-              matches.map((match: any) => <Match matchData={match} />)}
+            {matches && (
+              <div className="results">
+                {matches.map((match: any) => (
+                  <Match key={match.metadata.matchId} data={match} />
+                ))}
+              </div>
+            )}
           </>
         )}
       </section>

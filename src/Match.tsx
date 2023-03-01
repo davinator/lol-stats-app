@@ -1,7 +1,19 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
-// import "./Match.css";
+import "./Match.css";
 
-const Match = ({ matchData }: any) => (
-  <div className="Match">{JSON.stringify(matchData)}</div>
-);
+const Match = ({ data }: any) => {
+  console.log(data);
+  const summoner = data.info.summoner;
+  const result = summoner.win ? "Victory" : "Loss";
+
+  return (
+    <ul className={`Match ${result}`}>
+      <li>Champion: {summoner.championName}</li>
+      <li>Match result: {result}</li>
+      <li>
+        KDA: {summoner.kills} / {summoner.deaths} / {summoner.assists} (
+        {summoner.challenges.kda})
+      </li>
+    </ul>
+  );
+};
 export default Match;

@@ -16,6 +16,7 @@ class LolApi {
   };
 
   getMatches = async (name: string) => {
+    console.error("DA FUQ MAN");
     return this.request(`${apiBaseUrl}/summoner/matches`, {
       name,
     });

@@ -22,7 +22,7 @@ function App() {
     }
 
     if (!matches.ok) {
-      setIsLoading(true);
+      setIsLoading(false);
       setErrorMessage((await matches.json()).message);
       return;
     }
@@ -30,8 +30,10 @@ function App() {
     setMatches(result);
     setIsLoading(false);
   };
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.currentTarget.value);
+    setErrorMessage("");
+  };
 
   return (
     <div className="App">
@@ -39,18 +41,26 @@ function App() {
         <h2>LOL Stats App</h2>
       </header>
       <section className="body">
-        {errorMessage && <section className="error">errorMessage</section>}
+        {errorMessage && <div className="error">{errorMessage}</div>}
         {isLoading ? (
           <div className="body-loading">Loading...</div>
         ) : (
           <>
             <form className="body-form" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="summoner"
-                value={name}
-                onChange={handleNameChange}
-              />
+              <div className="body-form-field-group">
+                <label htmlFor="Summoner" className="body-form-summoner-label">
+                  Type your summoner name and hit enter.
+                </label>
+                <input
+                  id="Summoner"
+                  data-testid="summoner-txt-field"
+                  className="body-form-summoner-field"
+                  type="text"
+                  name="summoner"
+                  value={name}
+                  onChange={handleNameChange}
+                />
+              </div>
             </form>
             {matches && (
               <div className="results">

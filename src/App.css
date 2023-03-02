@@ -1,9 +1,30 @@
 .App {
   text-align: center;
+  padding: 10px;
+  margin: auto;
+  max-width: 500px;
 }
 
 .Header {
   margin-top: 100px;
+}
+
+.error {
+  border: 1px solid rgb(137, 28, 28);
+  background-color: rgb(220, 164, 164);
+  margin: 10px 0;
+}
+
+.body-form-field-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.body-form-summoner-field {
+  margin-top: 10px;
+  max-width: 200px;
+  padding: 4px;
 }
 
 .results {

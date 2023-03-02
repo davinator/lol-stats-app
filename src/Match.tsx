@@ -1,7 +1,6 @@
 import "./Match.css";
 
-const Match = ({ data }: any) => {
-  console.log(data);
+const Match = ({ className, data }: any) => {
   const summoner = data.info.summoner;
   const result = summoner.win ? "Victory" : "Loss";
 
